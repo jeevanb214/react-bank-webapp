@@ -1,17 +1,17 @@
 import axios from "axios";
-import React, { Component } from "react";
-import { Table, Button } from "reactstrap";
+import React, { Component, useState } from "react";
+import { Link, Route } from "react-router-dom";
+import { Table, Button, Container } from "reactstrap";
 import baseUrl from "../services/Api";
 
 const Users = ({ users, update }) => {
-
   const deleteUser = (id) => {
-    console.log("ID",id);
+    console.log("ID", id);
     axios.delete(`${baseUrl}deleteUser/${id}`).then(
       (response) => {
         console.log(response);
         console.log("Success");
-        update(id);
+        update(id); //this will call the parent App.js and update the dom
       },
       (error) => {
         console.log(error);
@@ -19,6 +19,7 @@ const Users = ({ users, update }) => {
       }
     );
   };
+
   var rowCount = 1;
   return (
     <Table>
@@ -48,10 +49,17 @@ const Users = ({ users, update }) => {
             <td>{usr.contact}</td>
             <td>{usr.status}</td>
             <td>{usr.userType}</td>
-            <Button color="danger" onClick={()=>{deleteUser(usr.id)}}>
+            <Button
+              color="danger"
+              onClick={() => {
+                deleteUser(usr.id);
+              }}
+            >
               Delete
             </Button>
-            <Button color="warning">Update</Button>
+            <Link className="btn btn-warning mr-1" to={`/editUser/${usr.id}`} exact>
+              Edit
+            </Link>
           </tr>
         </tbody>
       ))}

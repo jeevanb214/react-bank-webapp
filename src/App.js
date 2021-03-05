@@ -10,6 +10,7 @@ import AddUser from "./components/AddUser";
 import { Col, Container, Row } from "reactstrap";
 import Menus from "./components/Menus";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import UpdateUser from "./components/UpdateUser";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
               <Route path="/" component={Home} exact/>
               <Route path="/user-createUser" component={AddUser} exact/>
               <Route path="/user-getAllUsers" component={Allusers} exact/>
+              <Route path="/editUser/:id" component={UpdateUser} exact/>
             </Col>
           </Row>
         </Container>
